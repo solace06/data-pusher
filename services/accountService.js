@@ -5,7 +5,7 @@ module.exports = {
     try {
       return await repo.create(body);
     } catch (err) {
-      throw err; // Let controller handle SequelizeValidationError or other errors
+      throw err; 
     }
   },
 
