@@ -5,7 +5,7 @@ const path = require('path');
 
 const db = new Sequelize({
   dialect: 'sqlite',
-  storage: path.resolve(__dirname, 'database.sqlite'),
+  storage: path.resolve(__dirname, 'db.sqlite'),
   logging: false       
 });
 
