@@ -2,11 +2,17 @@ const repo = require('../repositories/destinationRepository');
 
 module.exports = {
   create: async (body) => {
-    return await repo.create(body);
+    try {
+      return await repo.create(body);
+    } catch (err) {
+      throw err; // Let controller handle SequelizeValidationError or other errors
+    }
   },
 
   get: async (id) => {
-    return await repo.getById(id);
+    const destination = await repo.getById(id);
+    if (!destination) throw new Error('destination not found');
+    return destination;
   },
 
   byAccount: async (accountId) => {
@@ -32,5 +38,5 @@ module.exports = {
     const deletedCount = await repo.delete(id);
     if (deletedCount === 0) throw new Error('destination not found');
     return { message: 'destination deleted successfully' };
-  }
+  },
 };
