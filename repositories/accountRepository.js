@@ -13,11 +13,15 @@ class AccountRepository {
     return Account.findByPk(id);
   }
 
-async update(id, data) {
-  return Account.update(data, { where: { id } });
-}
+  getByToken(token) {
+    return Account.findOne({ where: { secretToken: token }, include: 'destinations' });
+  }
 
-async delete(id) {
+  async update(id, data) {
+    return Account.update(data, { where: { id } });
+  }
+
+  async delete(id) {
     const deletedRows = await Account.destroy({ where: { id } });
     if (deletedRows === 0) {
       throw new Error(`account with id ${id} not found for deletion`);

@@ -11,11 +11,15 @@ exports.receive = async (req, res) => {
 
     const result = await handlerSvc.handle(token, req.body);
 
-    if (result.error) return res.status(401).json({ message: result.error });
+    if (result.error) {
+      const msg = result.detail ? `${result.error} - ${result.detail}` : result.error;
+      return res.status(500).json({ message: msg });
+    }
     if (result.message) return res.status(200).json({ message: result.message });
 
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } catch (err) {
-    res.status(500).json({ message: 'something went wrong' });
+    console.error('controller error:', err);
+    return res.status(500).json({ message: 'something went wrong' });
   }
 };

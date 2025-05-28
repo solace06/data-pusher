@@ -6,7 +6,12 @@ async function pushToDestination(dest, payload) {
     if (dest.method === 'GET') {
       return await axios.get(dest.url, { params: payload, headers: dest.headers });
     }
-    return await axios({ url: dest.url, method: dest.method, data: payload, headers: dest.headers });
+    return await axios({
+      url: dest.url,
+      method: dest.method,
+      data: payload,
+      headers: dest.headers
+    });
   } catch (err) {
     throw new Error(`destination failed: ${dest.id}, ${err.message}`);
   }
@@ -35,7 +40,8 @@ module.exports = {
 
       return { accountId: account.id, count: outcomes.length, outcomes };
     } catch (err) {
-      return { error: 'internal error while handling data' };
+      console.error('handle error:', err);
+      return { error: 'internal error while handling data', detail: err.message };
     }
   }
 };
