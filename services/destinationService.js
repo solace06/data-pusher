@@ -6,9 +6,7 @@ module.exports = {
   },
 
   get: async (id) => {
-    const destination = await repo.getById(id);
-    if (!destination) throw new Error('destination not found');
-    return destination;
+    return await repo.getById(id);
   },
 
   byAccount: async (accountId) => {
@@ -32,9 +30,7 @@ module.exports = {
 
   remove: async (id) => {
     const deletedCount = await repo.delete(id);
-    if (deletedCount === 0) {
-      throw new Error('destination not found');
-    }
+    if (deletedCount === 0) throw new Error('destination not found');
     return { message: 'destination deleted successfully' };
   }
 };

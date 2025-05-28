@@ -30,9 +30,7 @@ module.exports = {
 
   remove: async (id) => {
     const deletedCount = await repo.delete(id);
-    if (deletedCount === 0) {
-      throw new Error('account not found');
-    }
-    return { message: 'Account deleted successfully' };
+    if (deletedCount === 0) throw new Error('account not found');
+    return { message: 'account deleted successfully' };
   }
 };
