@@ -4,6 +4,7 @@ const db = require('./db');
 // routers
 const accountRoutes     = require('./routes/accounts');
 const destinationRoutes = require('./routes/destinations');
+const dataHandlerRoute  = require('./routes/incomingData');
 
 const app = express();
 app.use(express.json());
@@ -11,7 +12,7 @@ app.use(express.json());
 // v1 API prefix
 app.use('/api/v1/accounts',accountRoutes);
 app.use('/api/v1/destinations',  destinationRoutes);
-
+app.use('/server',               dataHandlerRoute);
 
 // health-check
 app.get('/ping',(req,res)=>res.send('pong'));
