@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const c = require('../controllers/destinationController');
+const c = require('../controllers/destinationsController');
 
 router.route('/')
   .post(c.create);

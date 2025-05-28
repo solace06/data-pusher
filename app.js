@@ -3,7 +3,7 @@ const db = require('./db');
 
 // routers
 const accountRoutes     = require('./routes/accounts');
-const destinationRoutes = require('./routes/destinationRoutes');
+const destinationRoutes = require('./routes/destinations');
 
 const app = express();
 app.use(express.json());
